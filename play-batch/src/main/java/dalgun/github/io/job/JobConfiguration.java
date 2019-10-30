@@ -45,24 +45,28 @@ public class JobConfiguration {
     @Bean
     public Job job(){
         return jobBuilderFactory.get("job")
-                .start(step1())
-                .on("FAILED")
-                .end()
-                .from(step1())
-                .on("*")
-                .to(step2())
-                .on("FAILED")
-                .end()
-                .from(step2())
-                .on("*")
-                .to(step3())
-                .next(step4())
-                .on("*")
-                .end()
-                .end()
+                .start(step1()) //STEP 1 실행
+                .on("FAILED")// STEP 1 결과가 FAILED 일 경우
+                .end()// 종료
+                .from(step1()) // STEP1 의 결과로부터
+                .on("*") // FAILED 를 제외한 모든 경우
+                .to(step2()) // STEP 2로 이동 후 실행
+                .on("FAILED")// STEP 2의 결과가 FAILED 일 경우
+                .end()// 종료
+                .from(step2()) // STEP2 의 결과로부터
+                .on("*") // FAILED 를 제외한 모든 경우
+                .to(step3()) // STEP 3로 이동 후 실행
+                .next(step4()) // STEP 3의 결과에 상관없이 STEP 4 실행
+                .on("*") // STEP4 의 모든 결과에 상관없이
+                .end() // FLOW 종료
+                .end() // JOB 종료
                 .build();
     }
 
+    /**
+     * 이중화를 대비해서 LOCK TABLE 생성, 사용 여부 체크
+     * @return
+     */
     @Bean
     public Step step1(){
         return stepBuilderFactory.get("step1")
@@ -114,13 +118,12 @@ public class JobConfiguration {
                     List<PayInfo> payInfoList = payInfoRepository.findAllBySuccessYn(false);
 
                     for(PayInfo payInfo: payInfoList){
-//                        log.debug("do something before:{}",payInfo);
+                        // 무언가를 처리하고 결과값이 TRUE 일때 결과 성공 처리
                         if(true){
                             payInfo.setRequestDateTime(LocalDateTime.now());
                             payInfo.setSuccessYn(true);
                             payInfoRepository.save(payInfo);
                         }
-//                        log.debug("do something after:{}", payInfo);
                     }
                     return RepeatStatus.FINISHED;
                 }).build();
