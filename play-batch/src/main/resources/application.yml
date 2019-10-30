@@ -40,4 +40,3 @@ logging:
     #    org.hibernate.SQL: trace
     #    org.hibernate.type.descriptor.sql: trace
     dalgun.github.io: trace
-    org.springframework.batch.core: trace

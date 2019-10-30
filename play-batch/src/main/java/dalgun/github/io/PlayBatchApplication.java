@@ -3,6 +3,7 @@ package dalgun.github.io;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author dalgun
@@ -10,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableBatchProcessing
+@EnableScheduling
 public class PlayBatchApplication {
     public static void main(String[] args) { SpringApplication.run(PlayBatchApplication.class, args); }
+
 }
