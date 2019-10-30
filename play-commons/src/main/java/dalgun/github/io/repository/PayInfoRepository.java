@@ -13,6 +13,7 @@ import java.util.List;
 public interface PayInfoRepository extends JpaRepository<PayInfo, Long> {
 
     List<PayInfo> findAllBySuccessYnAndRequestDateTimeBetween(boolean successYn, LocalDateTime start, LocalDateTime end);
+    List<PayInfo> findAllBySuccessYn(boolean successYn);
 
 
 }

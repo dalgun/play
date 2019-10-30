@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -59,7 +60,8 @@ public class PayInfo {
     /**
      * 요청시각
      */
-    @JsonFormat(pattern = "yyyyMMdd hh:mm:ss")
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime requestDateTime;
 
     /**

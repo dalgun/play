@@ -47,8 +47,6 @@ public class JobConfiguration {
         return jobBuilderFactory.get("job")
                 .start(step1())
                 .on("FAILED")
-                .to(step3())
-                .on("*")
                 .end()
                 .from(step1())
                 .on("*")
@@ -64,7 +62,6 @@ public class JobConfiguration {
     public Step step1(){
         return stepBuilderFactory.get("step1")
                 .tasklet((stepContribution, chunkContext) -> {
-
                     LockTable lockTable = Optional
                             .ofNullable(lockTableRepository.findOne("play-batch"))
                             .orElse(LockTable
@@ -73,8 +70,6 @@ public class JobConfiguration {
                                     .useYn(false)
                                     .checkDataTime(LocalDateTime.now())
                                     .build());
-
-
                     if(lockTable.isUseYn()){
                         stepContribution.setExitStatus(ExitStatus.FAILED);
                     }else{
@@ -89,11 +84,13 @@ public class JobConfiguration {
     public Step step2(){
         return stepBuilderFactory.get("step2")
                 .tasklet((stepContribution, chunkContext) -> {
-                    List<PayInfo> payInfoList = payInfoRepository.findAllBySuccessYnAndRequestDateTimeBetween(false, LocalDateTime.now().minusMinutes(5), LocalDateTime.now());
+
+                    List<PayInfo> payInfoList = payInfoRepository.findAllBySuccessYn(false);
 
                     for(PayInfo payInfo: payInfoList){
                         log.debug("do something before:{}",payInfo);
                         if(true){
+                            payInfo.setRequestDateTime(LocalDateTime.now());
                             payInfo.setSuccessYn(true);
                             payInfoRepository.save(payInfo);
                         }
@@ -107,7 +104,10 @@ public class JobConfiguration {
     public Step step3(){
         return stepBuilderFactory.get("step3")
                 .tasklet((stepContribution, chunkContext) -> {
-                    lockTableRepository.findOne(instanceId).setUseYn(false);
+                    LockTable lockTable = lockTableRepository.findOne(instanceId);
+                    lockTable.setUseYn(false);
+                    lockTable.setCheckDataTime(LocalDateTime.now());
+                    lockTableRepository.save(lockTable);
                     return RepeatStatus.FINISHED;
                 }).build();
     }
