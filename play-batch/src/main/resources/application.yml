@@ -1,10 +1,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pay?serverTimezone=Asia/Tokyo&useSSL=false
+    url: jdbc:mysql://localhost:3306/play?serverTimezone=Asia/Tokyo&useSSL=false
     type: com.zaxxer.hikari.HikariDataSource
-    username: mcpay
-    password: Mcpay123$
+    username: play
+    password: play123$
     hikari:
       connection-timeout: 5000
       maximum-pool-size: 10

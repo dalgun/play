@@ -1,3 +1,28 @@
+DROP TABLE IF EXISTS lock_table;
+DROP TABLE IF EXISTS pay_info;
+
+create table lock_table(
+	instance_id varchar(255) not null
+		primary key,
+	check_data_time datetime null,
+	use_yn varchar(255) not null
+);
+
+create table pay_info(
+	id bigint auto_increment
+		primary key,
+	amount int not null,
+	card_nm varchar(255) null,
+	card_no varchar(255) null,
+	installment_period varchar(255) null,
+	product varchar(255) null,
+	request_date_time datetime null,
+	success_yn varchar(255) not null,
+	type varchar(255) null,
+	user_name varchar(255) null
+)
+;
+
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION_CONTEXT ;
 DROP TABLE IF EXISTS BATCH_JOB_EXECUTION_CONTEXT ;
 DROP TABLE IF EXISTS BATCH_STEP_EXECUTION ;
