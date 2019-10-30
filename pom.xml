@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
+        <version>1.5.17.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>dalgun.github.io</groupId>
@@ -17,6 +17,7 @@
         <module>play-commons</module>
         <module>play-refactoring</module>
         <module>play-web</module>
+        <module>play-batch</module>
     </modules>
 
     <properties>

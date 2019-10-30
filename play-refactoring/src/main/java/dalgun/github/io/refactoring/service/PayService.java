@@ -1,8 +1,8 @@
 package dalgun.github.io.refactoring.service;
 
+import dalgun.github.io.model.PayInfo;
 import dalgun.github.io.refactoring.model.Formatter;
 import dalgun.github.io.refactoring.model.FormatterFactory;
-import dalgun.github.io.refactoring.model.PayInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

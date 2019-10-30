@@ -1,0 +1,40 @@
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pay?serverTimezone=Asia/Tokyo&useSSL=false
+    type: com.zaxxer.hikari.HikariDataSource
+    username: mcpay
+    password: Mcpay123$
+    hikari:
+      connection-timeout: 5000
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+      hibernate:
+        enable_lazy_load_no_trans: true
+        connection:
+          charSet: UTF-8
+        hbm2ddl:
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+
+mcare:
+  thread-pool:
+    core-pool-size: 10
+    max-pool-size: 50
+    queue-capacity: 65536
+
+logging:
+  level:
+    root: info
+    #    org.springframework: info
+    #    org.hibernate.SQL: trace
+    #    org.hibernate.type.descriptor.sql: trace
+    com.lemonhc.mcare: trace

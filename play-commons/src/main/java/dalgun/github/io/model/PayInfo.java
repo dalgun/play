@@ -1,11 +1,13 @@
-package dalgun.github.io.refactoring.model;
+package dalgun.github.io.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import dalgun.github.io.utils.BooleanToYNConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +19,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class PayInfo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
     /**
      * 사용자명
@@ -58,7 +65,9 @@ public class PayInfo {
     /**
      * 전문타입
      */
+    @Convert(converter = BooleanToYNConverter.class)
+    private boolean successYn;
+
     private String type;
 
 }
-

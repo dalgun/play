@@ -1,5 +1,7 @@
 package dalgun.github.io.refactoring.model;
 
+import dalgun.github.io.model.PayInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
