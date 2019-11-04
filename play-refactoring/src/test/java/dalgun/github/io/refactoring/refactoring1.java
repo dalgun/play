@@ -1,10 +1,10 @@
 package dalgun.github.io.refactoring;
 
-import dalgun.github.io.refactoring.model.PayInfo;
+import dalgun.github.io.model.PayInfo;
 import dalgun.github.io.refactoring.service.PayService;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class refactoring1 {
     PayInfo payInfo;
 
-    @BeforeEach
+    @Before
     public void init(){
 
         payInfo = new PayInfo();
