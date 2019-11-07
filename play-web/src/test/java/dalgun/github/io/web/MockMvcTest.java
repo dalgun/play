@@ -63,7 +63,7 @@ public class MockMvcTest {
     public void CONSULTING_RESERVATION_TEST() throws Exception{
 
         reqMap.put("reservationType", "CONSULTING");
-        reqMap.put("consultationType", "FAMILY");
+        reqMap.put("consultingType", "FAMILY");
         reqMap.put("memo", "Long Long ago..");
 
         mvc.perform(MockMvcRequestBuilders
